@@ -133,6 +133,14 @@ def classifyPose(landmarks, output_image, display=False):
     right_knee_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value],
                                       landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value],
                                       landmarks[mp_pose.PoseLandmark.RIGHT_ANKLE.value])
+
+    left_hip_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value],
+                                    landmarks[mp_pose.PoseLandmark.LEFT_HIP.value],
+                                    landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value])
+
+    right_hip_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value],
+                                     landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value],
+                                     landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value])
     
     #----------------------------------------------------------------------------------------------------------------
     
@@ -186,9 +194,18 @@ def classifyPose(landmarks, output_image, display=False):
     #----------------------------------------------------------------------------------------------------------------
 
     # check if it is bhujangasana
-    
+    if left_knee_angle>165 and left_knee_angle<210 or right_knee_angle>165 and right_knee_angle<210:
+        if left_shoulder_angle>=30 and left_shoulder_angle<=50 or right_shoulder_angle>=30 and right_shoulder_angle<=50:
+            if left_elbow_angle>165 and left_elbow_angle<210 or right_elbow_angle>165 and right_elbow_angle<210:
+                 label= 'Bhujangasana'
 
+    #----------------------------------------------------------------------------------------------------------------
 
+    #check if it is uttanpadasana
+    if left_hip_angle >= 90 and left_hip_angle < 135 and right_hip_angle >= 90 and right_hip_angle < 135:
+        if left_elbow_angle>165 and left_elbow_angle<210 and right_elbow_angle>165 and right_elbow_angle<210:
+            if left_knee_angle>165 and left_knee_angle<210 and right_knee_angle>165 and right_knee_angle<210:
+                    label = 'Uttanpadasana'
     #-----------------------------------------------------------------------------------------------------------------
     
     # Check if the pose is classified successfully
@@ -218,8 +235,8 @@ pose_video = mp_pose.Pose(static_image_mode=False, min_detection_confidence=0.5,
 
 # Initialize the VideoCapture object to read from the webcam.
 camera_video = cv2.VideoCapture(0)
-camera_video.set(3,640)
-camera_video.set(4,480) 
+camera_video.set(3,360)
+camera_video.set(4,240) 
 
 # Initialize a resizable window.
 cv2.namedWindow('Pose Classification', cv2.WINDOW_NORMAL)

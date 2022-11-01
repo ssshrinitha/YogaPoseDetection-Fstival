@@ -23,8 +23,8 @@ pose_video = mp_pose.Pose(static_image_mode=False, min_detection_confidence=0.5,
 
 # Initialize the VideoCapture object to read from the webcam.
 camera_video = cv2.VideoCapture(0)
-camera_video.set(3,360)
-camera_video.set(4,240) 
+camera_video.set(3,480)
+camera_video.set(4,360) 
 
 # Initialize a resizable window.
 cv2.namedWindow('Pose Classification', cv2.WINDOW_NORMAL)

@@ -63,6 +63,23 @@ def classifyPose(landmarks, output_image, display=False):
     right_hip_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value],
                                      landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value],
                                      landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value])
+
+    # left_bend_hip_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value],
+    #                                      landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value],
+    #                                      landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value])
+    # right_bend_hip_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value],
+    #                                      landmarks[mp_pose.PoseLandmark.LEFT_HIP.value],
+    #                                      landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value])
+
+    # left_wrist_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value],
+    #                                    landmarks[mp_pose.PoseLandmark.LEFT_ANKLE.value],
+    #                                    landmarks[mp_pose.PoseLandmark.LEFT_HEEL.value])  
+                                
+    # right_wrist_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value],
+    #                                    landmarks[mp_pose.PoseLandmark.RIGHT_ANKLE.value],
+    #                                    landmarks[mp_pose.PoseLandmark.RIGHT_HEEL.value],)  
+                                       
+
     
     #----------------------------------------------------------------------------------------------------------------
     
@@ -116,21 +133,88 @@ def classifyPose(landmarks, output_image, display=False):
     #----------------------------------------------------------------------------------------------------------------
 
     # check if it is bhujangasana
-    if left_knee_angle>165 and left_knee_angle<210 or right_knee_angle>165 and right_knee_angle<210:
-        if left_shoulder_angle>=30 and left_shoulder_angle<=50 or right_shoulder_angle>=30 and right_shoulder_angle<=50:
-            if left_elbow_angle>165 and left_elbow_angle<210 or right_elbow_angle>165 and right_elbow_angle<210:
-                 label= 'Bhujangasana'
+    if right_hip_angle>=110 and right_hip_angle<=140 or left_hip_angle >=100 and left_hip_angle <=140:
+
+
+        if left_shoulder_angle>=15 and left_shoulder_angle<=30 or right_shoulder_angle>=15 and right_shoulder_angle<=30:
+
+            if right_knee_angle>165 and right_knee_angle<200 or left_knee_angle>165 and left_knee_angle<200 :
+
+                if right_elbow_angle>165 and right_elbow_angle<210 or left_elbow_angle>165 and left_elbow_angle<210:
+                    label= 'Bhujangasana'
 
     #----------------------------------------------------------------------------------------------------------------
 
-    #check if it is uttanpadasana
-    if left_hip_angle >= 90 and left_hip_angle < 135 and right_hip_angle >= 90 and right_hip_angle < 135:
-        if left_elbow_angle>165 and left_elbow_angle<210 and right_elbow_angle>165 and right_elbow_angle<210:
-            if left_knee_angle>165 and left_knee_angle<210 and right_knee_angle>165 and right_knee_angle<210:
-                    label = 'Uttanpadasana'
+    # #check if it is uttanpadasana
+    # if left_hip_angle >= 90 and left_hip_angle < 135 and right_hip_angle >= 90 and right_hip_angle < 135:
+    #     if left_elbow_angle>175 and left_elbow_angle<200 and right_elbow_angle>175 and right_elbow_angle<200:
+    #         if left_knee_angle>170 and left_knee_angle<195 and right_knee_angle>170 and right_knee_angle<195:
+    #                 label = 'Uttanpadasana'
+
     #-----------------------------------------------------------------------------------------------------------------
     
-    # Check if the pose is classified successfully
+    #check if trikonasana
+    if left_shoulder_angle>=80 and left_shoulder_angle<=110 and right_shoulder_angle>= 80 and right_shoulder_angle<110 :
+        # if right_bend_hip_angle> 50 and right_bend_hip_angle < 80 or left_bend_hip_angle >50 and left_bend_hip_angle<80:
+            if left_hip_angle > 230 and left_hip_angle<260 or right_hip_angle>230 and right_hip_angle<260:
+                if left_elbow_angle >150 and left_elbow_angle < 175 or right_elbow_angle > 150 and right_elbow_angle< 175 :
+                    if left_knee_angle >=170 and left_knee_angle <=195 or right_knee_angle>=170 and right_knee_angle<=195:
+                        label = "Trikonasana"
+                
+    #-----------------------------------------------------------------------------------------------------------------
+    
+    #check if it is cow pose 
+
+    if left_knee_angle > 75 and left_knee_angle<=110 or right_knee_angle >75 and right_knee_angle<=110 :
+        if left_shoulder_angle >75 and left_shoulder_angle <=110 or right_shoulder_angle >75 and right_shoulder_angle<=110 :
+            if left_hip_angle >75 and left_hip_angle < 100 or right_hip_angle>75 and right_hip_angle<100 :
+                label="cat-cow pose"
+
+    #-------------------------------------------------------------------------------------------------------------------
+    #check for savasana
+
+    # if left_shoulder_angle > 0 and left_shoulder_angle<20 or right_shoulder_angle>0 and right_shoulder_angle<20: 
+    if left_hip_angle > 165 and left_hip_angle<210 or right_hip_angle>165 and right_hip_angle<210:
+        if left_knee_angle >165 and left_knee_angle<210 or right_knee_angle>165 and right_knee_angle<=210:
+            if left_shoulder_angle > 0 and left_shoulder_angle<20 or right_shoulder_angle>0 and right_shoulder_angle<20: 
+                #if left_wrist_angle>100 and left_wrist_angle< 170 or right_wrist_angle>100 and right_wrist_angle<170:
+                 label="savsana"
+
+    #-------------------------------------------------------------------------------------------------------------------
+
+    #check if  its artha uttanasana
+
+    if left_hip_angle > 75 and left_hip_angle<100 or right_hip_angle>75 and right_hip_angle<100:
+         if left_knee_angle >175 and left_knee_angle<190 or right_knee_angle>175 and right_knee_angle<=180:
+            if left_shoulder_angle > 30 and left_shoulder_angle<70 or right_shoulder_angle>30 and right_shoulder_angle<70: 
+                label = "Artha Uttanasana"
+
+
+            if left_shoulder_angle > 165 and left_shoulder_angle<210 or right_shoulder_angle>165 and right_shoulder_angle<210:
+
+                label = "ViraBadhrasana" 
+            
+    #---------------------------------------------------------------------------------------------------------------------
+     #check if camel pose
+
+    if right_knee_angle>=80 and right_knee_angle<=100 or left_knee_angle>=80 and left_knee_angle<=100:
+        if right_shoulder_angle>=60 and right_shoulder_angle<=80 or left_shoulder_angle>=60 and left_shoulder_angle<=80:
+            if right_hip_angle>=105 and right_hip_angle<=145 or left_hip_angle>=105 and left_hip_angle<=145:
+                label = "camel pose"
+
+    #---------------------------------------------------------------------------------------------------------------------
+    # check if peacock pose
+
+    if left_elbow_angle>=80 and left_elbow_angle<=110 or right_elbow_angle>=80 and right_elbow_angle<=110:
+        if left_hip_angle > 165 and left_hip_angle<210 or right_hip_angle>165 and right_hip_angle<210:
+            if left_knee_angle >165 and left_knee_angle<210 or right_knee_angle>165 and right_knee_angle<=210:
+                label = "peacock pose"
+
+    #---------------------------------------------------------------------------------------------------------------------
+
+
+
+    # Check if the pose is classified successfullyu
     if label != 'Unknown Pose':
         
         # Update the color (to green) with which the label will be written on the image.
